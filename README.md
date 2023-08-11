@@ -4,6 +4,8 @@
 
 This is a simple app that allows you to save recommendations for initially books I wanted to read. Includes a search function to find book details via an api and option to save them to your list.
 
+Future dev to include other media plus links to websites and simple text notes.
+
 ## API used
 
 [Google Books API](https://developers.google.com/books/docs/v1/using)
