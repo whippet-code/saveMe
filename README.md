@@ -1,0 +1,11 @@
+# SaveMe App
+
+## Description
+
+This is a simple app that allows you to save recommendations for initially books I wanted to read. Includes a search function to find book details via an api and option to save them to your list.
+
+## API used
+
+[Google Books API](https://developers.google.com/books/docs/v1/using)
+This may require OAuth 2.0 set up to use? Will be fun adding google login to this app.
+Alternativly
