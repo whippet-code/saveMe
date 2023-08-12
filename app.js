@@ -6,14 +6,14 @@ const app = document.getElementById("app");
 const url = "https://www.googleapis.com/books/v1/volumes?q=";
 
 const getBooks = async (search) => {
-  const res = await fetch(url + search);
+  const res = await fetch(url + search + "&maxResults=5");
   const data = await res.json();
   return data.items;
 };
 
 const buildBookHTML = async () => {
   let bookListHTML = "";
-  const searchResults = await getBooks("author:Max Barry");
+  const searchResults = await getBooks("author:Simon Reeve");
 
   for (let book of searchResults) {
     console.log(book.volumeInfo);
