@@ -13,7 +13,7 @@ const getBooks = async (search) => {
 
 const buildBookHTML = async () => {
   let bookListHTML = "";
-  const searchResults = await getBooks("Harry%Potter%and%the+inauthor:Rowling");
+  const searchResults = await getBooks("author:Max Barry");
 
   for (let book of searchResults) {
     console.log(book.volumeInfo);
