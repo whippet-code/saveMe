@@ -37,7 +37,7 @@ const buildBookHTML = async (searchInput) => {
 // render the booklist
 const render = async (searchInput) => {
   const innerHTML = await buildBookHTML(searchInput);
-  searchResultsElement.innerHTML += innerHTML;
+  searchResultsElement.innerHTML = innerHTML;
 };
 
 // function to handle search submit
