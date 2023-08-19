@@ -46,9 +46,9 @@ const searchRequest = () => {
 };
 
 // event listener for search button
-document.getElementById("searchButton").addEventListener("click", () => {
-  searchRequest();
-});
+document
+  .getElementById("searchButton")
+  .addEventListener("click", searchRequest);
 
 // function to take user inout and add new book to list
 document.getElementById("addButton").addEventListener("click", () => {
