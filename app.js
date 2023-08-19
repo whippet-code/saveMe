@@ -53,5 +53,6 @@ document
 // function to take user inout and add new book to list
 document.getElementById("addButton").addEventListener("click", () => {
   const addBook = document.getElementById("addInput").value;
-  document.getElementById("savedBooks").innerHTML += `<li>${addBook}</li>`;
+  document.getElementById("savedBooks").innerHTML += `
+    <li id=${addBook}>${addBook}</li>`;
 });
