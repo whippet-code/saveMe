@@ -50,7 +50,7 @@ document
   .getElementById("searchButton")
   .addEventListener("click", searchRequest);
 
-// function to take user inout and add new book to list
+// function to take user input and add new book to list
 document.getElementById("addButton").addEventListener("click", () => {
   const addBook = document.getElementById("addInput").value;
   document.getElementById("savedBooks").innerHTML += `
