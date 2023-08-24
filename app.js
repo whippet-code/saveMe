@@ -51,8 +51,8 @@ document
   .addEventListener("click", searchRequest);
 
 // function to take user input and add new book to list
-document.getElementById("addButton").addEventListener("click", () => {
-  const addBook = document.getElementById("addInput").value;
+document.getElementById("add-to-list").addEventListener("click", () => {
+  const addBook = document.getElementById("item-to-add").value;
   document.getElementById("savedBooks").innerHTML += `
     <li id=${addBook}>${addBook}</li>`;
 });
