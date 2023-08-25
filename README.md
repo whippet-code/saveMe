@@ -12,8 +12,12 @@ Future dev to include other media plus links to websites and simple text notes.
 This may require OAuth 2.0 set up to use? Will be fun adding google login to this app.
 API / OAuth not required for search function.
 
-### Current state
+### Current todo state
 
-Add a save button to select the book required and save to the list.
+Tap items to remove from list.
+
+Add a save button to select the book required and save to the list. (tap to add)
+
+Search field trigger on pressing enter key.
 
 FInal step link to firebase DB to save the list. (live updates)
