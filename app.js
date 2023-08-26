@@ -9,7 +9,8 @@ const getInput = () => {
     alert("Please enter a search term");
     return;
   }
-
+  // clear field
+  document.getElementById("searchInput").value = "";
   return searchInput;
 };
 
@@ -60,10 +61,15 @@ document
 // function to take user input and add new book to list
 function addListItem(book) {
   document.getElementById("savedBooks").innerHTML += `
-    <li onclick="removeBook('${book}')" id=${book}>${book}</li>`;
+    <li onclick="removeBook('${book.replaceAll(
+      " ",
+      ""
+    )}')" id=${book.replaceAll(" ", "")}>${book}</li>`;
 }
 
 document.getElementById("add-to-list").addEventListener("click", () => {
   const addBook = document.getElementById("item-to-add").value;
   addListItem(addBook);
+  //clear input
+  document.getElementById("item-to-add").value = "";
 });
