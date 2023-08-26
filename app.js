@@ -30,7 +30,9 @@ const buildBookHTML = async (searchInput) => {
 
   for (let book of searchResults) {
     bookListHTML += `
-      <li onclick="addListItem('${book.volumeInfo.title}')">${book.volumeInfo.title} By - ${book.volumeInfo.authors[0]}</li></br>`;
+      <li onclick="
+          addListItem('${book.volumeInfo.title} - ${book.volumeInfo.authors[0]}')
+      ">${book.volumeInfo.title} By - ${book.volumeInfo.authors[0]}</li></br>`;
   }
 
   return bookListHTML;
