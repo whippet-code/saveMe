@@ -14,10 +14,4 @@ API / OAuth not required for search function.
 
 ### Current todo state
 
-Clear input upon add button press
-
-Add a save button to select the book required and save to the list. (tap to add)
-
-Search field trigger on pressing enter key.
-
 FInal step link to firebase DB to save the list. (live updates)

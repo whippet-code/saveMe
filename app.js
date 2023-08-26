@@ -29,7 +29,8 @@ const buildBookHTML = async (searchInput) => {
   const searchResults = await getBooks(searchInput);
 
   for (let book of searchResults) {
-    bookListHTML += `<li>${book.volumeInfo.title} By - ${book.volumeInfo.authors[0]}</li></br>`;
+    bookListHTML += `
+      <li onclick="addListItem('${book.volumeInfo.title}')">${book.volumeInfo.title} By - ${book.volumeInfo.authors[0]}</li></br>`;
   }
 
   return bookListHTML;
@@ -46,6 +47,8 @@ const searchRequest = () => {
   render(getInput());
 };
 
+// function to trigger searchRequest on pressing return from input
+
 //function to remove book from list
 const removeBook = (bookId) => {
   const bookEl = document.getElementById(bookId);
@@ -57,6 +60,15 @@ const removeBook = (bookId) => {
 document
   .getElementById("searchButton")
   .addEventListener("click", searchRequest);
+
+// event listener for pressing return in input box (search)
+document
+  .getElementById("searchInput")
+  .addEventListener("keydown", function (ev) {
+    if (ev.key == "Enter") {
+      return searchRequest();
+    }
+  });
 
 // function to take user input and add new book to list
 function addListItem(book) {
