@@ -45,14 +45,25 @@ const searchRequest = () => {
   render(getInput());
 };
 
+//function to remove book from list
+const removeBook = (bookId) => {
+  const bookEl = document.getElementById(bookId);
+  bookEl.remove();
+  // need to remove from DB also
+};
+
 // event listener for search button
 document
   .getElementById("searchButton")
   .addEventListener("click", searchRequest);
 
 // function to take user input and add new book to list
+function addListItem(book) {
+  document.getElementById("savedBooks").innerHTML += `
+    <li onclick="removeBook('${book}')" id=${book}>${book}</li>`;
+}
+
 document.getElementById("add-to-list").addEventListener("click", () => {
   const addBook = document.getElementById("item-to-add").value;
-  document.getElementById("savedBooks").innerHTML += `
-    <li id=${addBook}>${addBook}</li>`;
+  addListItem(addBook);
 });
