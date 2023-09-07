@@ -16,4 +16,4 @@ API / OAuth not required for search function.
 
 Single input box - search for book title and allow selection from that.
 
-FInal step link to firebase DB to save the list. (live updates)
+Final step link to firebase DB to save the list. (live updates)
