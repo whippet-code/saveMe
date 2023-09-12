@@ -62,28 +62,3 @@ const removeBook = (bookId) => {
 document
   .getElementById("searchButton")
   .addEventListener("click", searchRequest);
-
-// event listener for pressing return in input box (search)
-document
-  .getElementById("searchInput")
-  .addEventListener("keydown", function (ev) {
-    if (ev.key == "Enter") {
-      return searchRequest();
-    }
-  });
-
-// function to take user input and add new book to list
-function addListItem(book) {
-  document.getElementById("savedBooks").innerHTML += `
-    <li onclick="removeBook('${book.replaceAll(
-      " ",
-      ""
-    )}')" id=${book.replaceAll(" ", "")}>${book}</li>`;
-}
-
-document.getElementById("add-to-list").addEventListener("click", () => {
-  const addBook = document.getElementById("item-to-add").value;
-  addListItem(addBook);
-  //clear input
-  document.getElementById("item-to-add").value = "";
-});
