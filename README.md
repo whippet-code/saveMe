@@ -14,6 +14,10 @@ API / OAuth not required for search function.
 
 ### Current todo state
 
-Single input box - search for book title and allow selection from that.
-
 Final step link to firebase DB to save the list. (live updates)
+
+- create firebase DB
+- link in app
+- edit functions to utilise DB
+  - currently only adding / removing from DOM (no other storage used)
+- edit render function to be called via FB changes
