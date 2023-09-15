@@ -14,6 +14,9 @@ API / OAuth not required for search function.
 
 ### Current todo state
 
+- remove functions into helper file via JS modules.
+- import functions into index.js
+
 Final step link to firebase DB to save the list. (live updates)
 
 - create firebase DB
