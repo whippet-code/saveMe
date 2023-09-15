@@ -1,3 +1,19 @@
+//Importing Firebase and setup
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import {
+  getDatabase,
+  ref,
+} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
+const appSettings = {
+  databaseURL:
+    "https://saveme-76e9d-default-rtdb.europe-west1.firebasedatabase.app/",
+};
+
+const app = initializeApp(appSettings);
+const database = getDatabase(app);
+const bookListInDB = ref(database, "bookList");
+
 // Get references to HTML elements
 const searchResultsElement = document.getElementById("foundBooks");
 
@@ -19,6 +35,13 @@ const getBooks = async (search) => {
   const res = await fetch(url);
   const data = await res.json();
   return data.items;
+};
+
+// Function to add a book to the saved list
+const addListItem = (book) => {
+  const bookId = book.replaceAll(" ", "");
+  document.getElementById("savedBooks").innerHTML += `
+    <li onclick="removeBook('${bookId}')" id="${bookId}">${book}</li>`;
 };
 
 // Function to build HTML for book list from API response
@@ -48,13 +71,6 @@ const render = async (searchInput) => {
 // Function to handle search request
 const searchRequest = () => {
   render(getInput());
-};
-
-// Function to add a book to the saved list
-const addListItem = (book) => {
-  const bookId = book.replaceAll(" ", "");
-  document.getElementById("savedBooks").innerHTML += `
-    <li onclick="removeBook('${bookId}')" id="${bookId}">${book}</li>`;
 };
 
 // Function to remove a book from the list
