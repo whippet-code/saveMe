@@ -1,42 +1,3 @@
-//Importing Firebase and setup
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import {
-  getDatabase,
-  ref,
-} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
-
-const appSettings = {
-  databaseURL:
-    "https://saveme-76e9d-default-rtdb.europe-west1.firebasedatabase.app/",
-};
-
-const app = initializeApp(appSettings);
-const database = getDatabase(app);
-const bookListInDB = ref(database, "bookList");
-
-// Get references to HTML elements
-const searchResultsElement = document.getElementById("foundBooks");
-
-// Function to handle search request
-const searchRequest = () => {
-  render(getInput());
-};
-
-// Event Listeners
-// Event listener for search button
-document
-  .getElementById("searchButton")
-  .addEventListener("click", searchRequest);
-
-// Event listener for pressing Enter key in input box (search)
-document
-  .getElementById("searchInput")
-  .addEventListener("keydown", function (ev) {
-    if (ev.key === "Enter") {
-      searchRequest();
-    }
-  });
-
 // Function to get user input and validate
 const getInput = () => {
   const searchInput = document.getElementById("searchInput").value;
@@ -95,4 +56,19 @@ const buildBookHTML = async (searchInput) => {
 const render = async (searchInput) => {
   const innerHTML = await buildBookHTML(searchInput);
   searchResultsElement.innerHTML = innerHTML;
+};
+
+// Function to handle search request
+const searchRequest = () => {
+  render(getInput());
+};
+
+export {
+  getInput,
+  getBooks,
+  addListItem,
+  removeBook,
+  buildBookHTML,
+  render,
+  searchRequest,
 };
