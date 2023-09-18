@@ -79,15 +79,21 @@ const buildBookHTML = async (searchInput) => {
   const searchResults = await getBooks(searchInput);
 
   for (let book of searchResults) {
+    // deal with multiple authors or unknown
     const authors = book.volumeInfo.authors
       ? book.volumeInfo.authors[0]
       : "Unknown Author";
+
+    //original method via innerHTML
+    // bookListHTML += `
+    //   <li onclick='addListItem("${book.volumeInfo.title} - ${authors}")'>
+    //     ${book.volumeInfo.title} By - ${authors}
+    //   </li>`;
     bookListHTML += `
-      <li onclick="addListItem('${book.volumeInfo.title} - ${authors}')">
-        ${book.volumeInfo.title} By - ${authors}
-      </li>`;
+      <li id="${book}" onclick="console.log('Clicked')">${book}</li>`;
   }
 
+  console.log(bookListHTML);
   return bookListHTML;
 };
 

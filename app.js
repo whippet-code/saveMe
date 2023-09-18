@@ -1,19 +1,3 @@
-//Importing Firebase and setup
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import {
-  getDatabase,
-  ref,
-} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
-
-const appSettings = {
-  databaseURL:
-    "https://saveme-76e9d-default-rtdb.europe-west1.firebasedatabase.app/",
-};
-
-const app = initializeApp(appSettings);
-const database = getDatabase(app);
-const bookListInDB = ref(database, bookList);
-
 // build a quick test div to see if the app is working
 const searchResultsElement = document.getElementById("foundBooks");
 
@@ -35,7 +19,6 @@ const getBooks = async (search) => {
 
   const res = await fetch(url);
   const data = await res.json();
-
   return data.items;
 };
 
@@ -46,9 +29,7 @@ const buildBookHTML = async (searchInput) => {
 
   for (let book of searchResults) {
     bookListHTML += `
-      <li onclick="
-          addListItem('${book.volumeInfo.title} - ${book.volumeInfo.authors[0]}')
-      ">${book.volumeInfo.title} By - ${book.volumeInfo.authors[0]}</li></br>`;
+      <li onclick="addListItem('${book.volumeInfo.title}')">${book.volumeInfo.title} By - ${book.volumeInfo.authors[0]}</li></br>`;
   }
 
   return bookListHTML;
@@ -65,12 +46,7 @@ const searchRequest = () => {
   render(getInput());
 };
 
-// Function to add a book to the saved list
-const addListItem = (book) => {
-  const bookId = book.replaceAll(" ", "");
-  document.getElementById("savedBooks").innerHTML += `
-    <li onclick="removeBook('${bookId}')" id="${bookId}">${book}</li>`;
-};
+// function to trigger searchRequest on pressing return from input
 
 //function to remove book from list
 const removeBook = (bookId) => {
@@ -83,3 +59,28 @@ const removeBook = (bookId) => {
 document
   .getElementById("searchButton")
   .addEventListener("click", searchRequest);
+
+// event listener for pressing return in input box (search)
+document
+  .getElementById("searchInput")
+  .addEventListener("keydown", function (ev) {
+    if (ev.key == "Enter") {
+      return searchRequest();
+    }
+  });
+
+// function to take user input and add new book to list
+function addListItem(book) {
+  document.getElementById("savedBooks").innerHTML += `
+    <li onclick="removeBook('${book.replaceAll(
+      " ",
+      ""
+    )}')" id=${book.replaceAll(" ", "")}>${book}</li>`;
+}
+
+document.getElementById("add-to-list").addEventListener("click", () => {
+  const addBook = document.getElementById("item-to-add").value;
+  addListItem(addBook);
+  //clear input
+  document.getElementById("item-to-add").value = "";
+});
