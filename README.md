@@ -24,3 +24,7 @@ Final step link to firebase DB to save the list. (live updates)
 - edit functions to utilise DB
   - currently only adding / removing from DOM (no other storage used)
 - edit render function to be called via FB changes
+
+#### Lessons learnt
+
+Adding event listeners to dynamically created content requires an amount of planning. The element must be in the DOM before you can add a listener. USe event bubbling, or check out using different handler functions.
