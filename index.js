@@ -37,6 +37,14 @@ document
     }
   });
 
+// Event listeners for search results list
+document.getElementById("foundBooks").addEventListener("click", function (e) {
+  // But only alert for elements that have an alert-button class
+  if (e.target.classList.contains("found-book")) {
+    addListItem(e.target.innerHTML);
+  }
+});
+
 // Function to get user input and validate
 const getInput = () => {
   const searchInput = document.getElementById("searchInput").value;
@@ -69,36 +77,74 @@ const removeBook = (bookId) => {
 // Function to add a book to the saved list
 const addListItem = (book) => {
   const bookId = book.replaceAll(" ", "");
-  document.getElementById("savedBooks").innerHTML += `
-    <li onclick="removeBook('${bookId}')" id="${bookId}">${book}</li>`;
+  // document.getElementById("savedBooks").innerHTML += `
+  //   <li onclick="removeBook('${bookId}')" id="${bookId}">${book}</li>`;
+  const savedBookList = document.getElementById("savedBooks");
+
+  // generate new book to add to list
+  let newBook = document.createElement("li");
+  newBook.id = bookId;
+  newBook.innerText = book;
+
+  savedBookList.appendChild(newBook);
 };
 
 // Function to build HTML for book list from API response
-const buildBookHTML = async (searchInput) => {
-  let bookListHTML = "";
+// const buildBookHTML = async (searchInput) => {
+//   let bookListHTML = "";
+//   const searchResults = await getBooks(searchInput);
+
+//   for (let book of searchResults) {
+//     // deal with multiple authors or unknown
+//     const authors = book.volumeInfo.authors
+//       ? book.volumeInfo.authors[0]
+//       : "Unknown Author";
+
+//     bookListHTML += `
+//       <li onclick='addListItem("${book.volumeInfo.title} - ${authors}")'>
+//         ${book.volumeInfo.title} By - ${authors}
+//       </li>`;
+//   }
+
+//   console.log(bookListHTML);
+//   return bookListHTML;
+// };
+
+// function to build ul with li nodes
+const buildFoundBookList = async (searchInput) => {
+  // get the array of books from search via api call
   const searchResults = await getBooks(searchInput);
 
+  // save ul node to append with new li
+  const resultsList = document.querySelector("#foundBooks");
+
+  // loop found books arrray
   for (let book of searchResults) {
+    // build a new li node
+    let newLi = document.createElement("li");
+
     // deal with multiple authors or unknown
     const authors = book.volumeInfo.authors
       ? book.volumeInfo.authors[0]
       : "Unknown Author";
 
-    //original method via innerHTML
-    // bookListHTML += `
-    //   <li onclick='addListItem("${book.volumeInfo.title} - ${authors}")'>
-    //     ${book.volumeInfo.title} By - ${authors}
-    //   </li>`;
-    bookListHTML += `
-      <li id="${book}" onclick="console.log('Clicked')">${book}</li>`;
-  }
+    // add id to new li
+    newLi.setAttribute("id", book.id);
 
-  console.log(bookListHTML);
-  return bookListHTML;
+    // add class
+    newLi.setAttribute("class", "found-book");
+
+    // add li text
+    newLi.innerText = book.volumeInfo.title + " - " + authors;
+
+    // append ul with newLi
+    resultsList.appendChild(newLi);
+  }
 };
 
 // Function to render the book list on the page
 const render = async (searchInput) => {
-  const innerHTML = await buildBookHTML(searchInput);
-  searchResultsElement.innerHTML = innerHTML;
+  // const innerHTML = await buildBookHTML(searchInput);
+  // searchResultsElement.innerHTML = innerHTML;
+  buildFoundBookList(searchInput);
 };
