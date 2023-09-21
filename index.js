@@ -23,6 +23,7 @@ const searchRequest = () => {
 };
 
 // Event Listeners
+
 // Event listener for search button
 document
   .getElementById("searchButton")
@@ -42,6 +43,14 @@ document.getElementById("foundBooks").addEventListener("click", function (e) {
   // But only alert for elements that have an alert-button class
   if (e.target.classList.contains("found-book")) {
     addListItem(e.target.innerHTML);
+  }
+});
+
+//Listener for saved Books list
+document.getElementById("savedBooks").addEventListener("click", function (e) {
+  // Only apply for elements that have saved class
+  if (e.target.classList.contains("saved")) {
+    removeBook(e.target.id);
   }
 });
 
@@ -77,38 +86,17 @@ const removeBook = (bookId) => {
 // Function to add a book to the saved list
 const addListItem = (book) => {
   const bookId = book.replaceAll(" ", "");
-  // document.getElementById("savedBooks").innerHTML += `
-  //   <li onclick="removeBook('${bookId}')" id="${bookId}">${book}</li>`;
   const savedBookList = document.getElementById("savedBooks");
 
   // generate new book to add to list
   let newBook = document.createElement("li");
   newBook.id = bookId;
   newBook.innerText = book;
+  // add class
+  newBook.setAttribute("class", "saved");
 
   savedBookList.appendChild(newBook);
 };
-
-// Function to build HTML for book list from API response
-// const buildBookHTML = async (searchInput) => {
-//   let bookListHTML = "";
-//   const searchResults = await getBooks(searchInput);
-
-//   for (let book of searchResults) {
-//     // deal with multiple authors or unknown
-//     const authors = book.volumeInfo.authors
-//       ? book.volumeInfo.authors[0]
-//       : "Unknown Author";
-
-//     bookListHTML += `
-//       <li onclick='addListItem("${book.volumeInfo.title} - ${authors}")'>
-//         ${book.volumeInfo.title} By - ${authors}
-//       </li>`;
-//   }
-
-//   console.log(bookListHTML);
-//   return bookListHTML;
-// };
 
 // function to build ul with li nodes
 const buildFoundBookList = async (searchInput) => {
