@@ -30,45 +30,60 @@ const removeBook = (bookId) => {
 // Function to add a book to the saved list
 const addListItem = (book) => {
   const bookId = book.replaceAll(" ", "");
-  document.getElementById("savedBooks").innerHTML += `
-    <li onclick="removeBook('${bookId}')" id="${bookId}">${book}</li>`;
+  const savedBookList = document.getElementById("savedBooks");
+
+  // generate new book to add to list
+  let newBook = document.createElement("li");
+  newBook.id = bookId;
+  newBook.innerText = book;
+  // add class
+  newBook.setAttribute("class", "saved");
+
+  savedBookList.appendChild(newBook);
 };
 
-// Function to build HTML for book list from API response
-const buildBookHTML = async (searchInput) => {
-  let bookListHTML = "";
+// function to build ul with li nodes
+const buildFoundBookList = async (searchInput) => {
+  // get the array of books from search via api call
   const searchResults = await getBooks(searchInput);
 
+  // save ul node to append with new li
+  const resultsList = document.querySelector("#foundBooks");
+
+  // loop found books arrray
   for (let book of searchResults) {
+    // build a new li node
+    let newLi = document.createElement("li");
+
+    // deal with multiple authors or unknown
     const authors = book.volumeInfo.authors
       ? book.volumeInfo.authors[0]
       : "Unknown Author";
-    bookListHTML += `
-      <li onclick="addListItem('${book.volumeInfo.title} - ${authors}')">
-        ${book.volumeInfo.title} By - ${authors}
-      </li>`;
-  }
 
-  return bookListHTML;
+    // add id to new li
+    newLi.setAttribute("id", book.id);
+
+    // add class
+    newLi.setAttribute("class", "found-book");
+
+    // add li text
+    newLi.innerText = book.volumeInfo.title + " - " + authors;
+
+    // append ul with newLi
+    resultsList.appendChild(newLi);
+  }
 };
 
 // Function to render the book list on the page
 const render = async (searchInput) => {
-  const innerHTML = await buildBookHTML(searchInput);
-  searchResultsElement.innerHTML = innerHTML;
-};
-
-// Function to handle search request
-const searchRequest = () => {
-  render(getInput());
+  buildFoundBookList(searchInput);
 };
 
 export {
-  getInput,
-  getBooks,
+  render,
+  buildFoundBookList,
   addListItem,
   removeBook,
-  buildBookHTML,
-  render,
-  searchRequest,
+  getBooks,
+  getInput,
 };
