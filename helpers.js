@@ -3,7 +3,7 @@ const getInput = () => {
   const searchInput = document.getElementById("searchInput").value;
   if (searchInput === "") {
     alert("Please enter a search term");
-    return;
+    return false;
   }
   // Clear input field after reading the value
   document.getElementById("searchInput").value = "";
@@ -76,7 +76,7 @@ const buildFoundBookList = async (searchInput) => {
 
 // Function to render the book list on the page
 const render = async (searchInput) => {
-  buildFoundBookList(searchInput);
+  searchInput ? buildFoundBookList(searchInput) : "";
 };
 
 export {
