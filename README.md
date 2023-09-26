@@ -17,6 +17,8 @@ API / OAuth not required for search function.
 - Styles
   - Add transitions to click events on books
   - Add loading state while awaiting search results
+  - General style refresh (more booky)
+  - mobile first
 
 Final step link to firebase DB to save the list. (live updates)
 
